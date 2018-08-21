@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Base de datos</title>
+
+	<!--Bootstrap-->
+	<link rel="stylesheet" 
+		  href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" 
+		  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" 
+		  crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 
+		    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" 
+		    crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" 
+		    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" 
+		    crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" 
+		    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" 
+		    crossorigin="anonymous"></script>
+
+	<!--Angular-->
+	<script src="js/lib/angular.js"></script>
+	<!--Aplicación-->
+	<script src="js/bd-app.js"></script>
+	<!--Controladores-->
+	<script src="js/ctrl/cancionesCtrl.js"></script>
+</head>
+<!--Para dar acceso a la aplicación ANGULAR al DOM es necesario agregar el atributo ng-app haciendo referencia el nombre de la aplicación(archivo: bd-app.js) -->
+<body ng-app=appBD>
+	<section class="container"
+		     ng-controller="cancionesCtrl">  <!--Una aplicación puede tener varios controladores, el controlador es nuesta conexión con el DOM y el alcance del controlador es a partir del nodo donde es declarado-->
+		<h1 class="row">Canciones</h1>
+
+
+		<div class="row">
+			<!--Formulario para insertar canciones-->
+			<form class="col-xs-12 col-sm-12 col-md-8 col-lg-8"
+				  name="formCanciones">
+				<div class="form-group">
+					<label for="tituloCancion">Título canción:</label>
+					<input type="text"
+						   class="form-control"
+						   id="tituloCancion"
+						   name="tituloCancion"
+						   ng-model="data.tituloCancion" 
+						   ng-required="true"> 
+					<!--Con el atributo ng-model se hace referencia a la variable correspondiente del controlador(archivo: ctrl/cancionesCtrl.js)-->
+				</div>
+				<div class="form-group">
+					<label for="interprete">Interprete</label>
+					<input type="text"
+						   class="form-control"
+						   id="interprete"
+						   name="interprete"
+						   ng-model="data.interprete"
+						   ng-required="true">
+				</div>
+
+				<button class="btn btn-primary"
+						ng-disabled="formCanciones.$invalid"
+						ng-click="save()">Agregar canción</button>
+				<!--Validación simple (deshabilitar botón), los campos tituloCancion e interprete deben tener algo escrito para poder se agregados-->
+			</form>
+
+			<!--Lista de canciones-->
+			<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+				<p ng-repeat="c in canciones">
+					<span>{{c.tituloCancion}}</span> -
+					<span>{{c.interprete}}</span>
+				</p>
+			</div>
+		</div>
+	</section>
+</body>
+</html>
