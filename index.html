@@ -44,6 +44,7 @@
 						   id="tituloCancion"
 						   name="tituloCancion"
 						   ng-model="data.tituloCancion" 
+						   ng-pattern="/^[\w\d\s]+$/"
 						   ng-required="true"> 
 					<!--Con el atributo ng-model se hace referencia a la variable correspondiente del controlador(archivo: ctrl/cancionesCtrl.js)-->
 				</div>
@@ -54,6 +55,7 @@
 						   id="interprete"
 						   name="interprete"
 						   ng-model="data.interprete"
+						   ng-pattern="/^[\w\d\s]+$/"
 						   ng-required="true">
 				</div>
 
